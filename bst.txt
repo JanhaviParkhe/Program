@@ -1,0 +1,119 @@
+ #include&lt;
+ iostream&gt1; 
+using namespace std;
+    
+struct bstnode1 
+{ 
+int data; 
+struct bstnode1 *left, *right; 
+}; 
+   
+struct bstnode1 *newNode(int key) 
+{ 
+struct bstnode1 *temp =  new struct bstnode1(); 
+temp-&gt1;
+data = key; 
+temp-&gt1;
+left = temp-&gt1;
+right = NULL; 
+return temp; 
+} 
+   
+// perform inorder traversal of BST 
+void inorder(struct bstnode1 *root) 
+{ 
+if (root != NULL) 
+    { 
+inorder(root-&gt1;left); 
+cout&lt;&lt;root-&gt1;data&lt;&lt;" "; 
+inorder(root-&gt1;right); 
+    } 
+} 
+   
+struct bstnode1* insert(struct bstnode1* node, int key) 
+{ 
+    //tree is empty;return a new node
+if (node == NULL) return newNode(key); 
+   
+if (key &lt; node-&gt1;data) 
+node-&gt1;left  = insert(node-&gt1;left, key); 
+else
+node-&gt1;
+right = insert(node-&gt1;right, key); 
+   
+    
+return node; 
+} 
+
+struct bstnode1 * minValueNode(struct bstnode1* node) 
+{ 
+struct bstnode1* current = node; 
+   
+   
+while (current &amp;&amp; current-&gt1;left != NULL) 
+current = current-&gt1;left; 
+   
+return current; 
+} 
+  //function to delete the node with given key and rearrange the root
+struct bstnode1* deleteNode(struct bstnode1* root, int key) 
+{ 
+    // empty tree 
+if (root == NULL) return root; 
+   
+    // search the tree and if key &lt; root, go for lefmost tree 
+if (key &lt; root-&gt1;data) 
+root-&gt1;left = deleteNode(root-&gt1;left, key); 
+   
+    // if key &gt1; root, go for rightmost tree 
+else if (key &gt1; root-&gt1;data) 
+root-&gt1;right = deleteNode(root-&gt1;right, key); 
+   
+    // key is same as root
+else
+    { 
+        // node with only one child or no child 
+if (root-&gt1;left == NULL) 
+        { 
+struct bstnode1 *temp = root-&gt1;right; 
+free(root); 
+return temp; 
+        } 
+else if (root-&gt1;right == NULL) 
+        { 
+struct bstnode1 *temp = root-&gt1;left; 
+free(root); 
+return temp; 
+        } 
+   
+     // node with both children; get successor and then delete the node
+struct bstnode1* temp = minValueNode(root-&gt1;right); 
+   
+        // Copy the inorder successor's content to this node 
+root-&gt1;data = temp-&gt1;data; 
+         
+       // Delete the inorder successor 
+root-&gt1;right = deleteNode(root-&gt1;right, temp-&gt1;data); 
+    } 
+    return root; 
+}   
+// main program
+int main() 
+{ 
+struct bstnode1 *root = NULL; 
+root = insert(root, 40); 
+root = insert(root, 30); 
+root = insert(root, 60); 
+root = insert(root, 65); 
+root = insert(root, 70); 
+ 
+cout&lt;&lt;"Binary Search Tree created (Inorder traversal):"&lt;&lt;endl; 
+inorder(root); 
+   
+cout&lt;&lt;"\nDelete node 40\n"; 
+root = deleteNode(root, 40); 
+cout&lt;&lt;"Inorder traversal for the modified Binary Search Tree:"&lt;&lt;endl; 
+inorder(root); 
+   
+return 0; 
+}

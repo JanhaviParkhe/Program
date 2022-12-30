@@ -1,0 +1,72 @@
+#include<iostream>
+using namespace std;
+int main()
+{
+int i,ch,a[10];
+do{
+cout<<"Choose one";
+cin>>ch;
+switch(ch)
+{
+   case 1: 
+   //Break Desmonstration
+  for (int i = 0; i < 10; i++) {
+    if (i == 4) {
+      break;
+    }
+    cout << i << "\n";
+  } 
+ case 2: 
+ // continue Demostration
+ for (int i = 0; i < 10; i++) {
+  if (i == 4) {
+    continue;
+  }
+  cout << i << "\n";
+}
+case 3:
+// if else demostration
+ cin>>i;
+ if(i%2==0)
+   cout<<even;
+else
+ cout<<odd;   
+case 4:
+//while and for loop demostration
+ for(i=1;i<=5;i++)
+    cin>>a[i];
+  i=1;
+  while(i<=5)
+  {
+	cout<<a[i];
+	i++;
+  }
+  case 5:
+  //recursion demostration
+  int factorial(int);
+
+    int n, result;
+
+    cout << "Enter a non-negative number: ";
+    cin >> n;
+
+    result = factorial(n);
+    cout << "Factorial of " << n << " = " << result;
+    return 0;
+}
+
+int factorial(int n) {
+    if (n > 1) {
+        return n * factorial(n - 1);
+    } else {
+        return 1;
+    }
+}
+default:
+cout<<"Wrong Choice";
+}
+
+cin>>choice;
+}while(choice=='y');
+return 0;
+}
